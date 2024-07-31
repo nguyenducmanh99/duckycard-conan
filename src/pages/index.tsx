@@ -1,118 +1,160 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 import { Inter } from "next/font/google";
+import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
-
+const correctOTP = 'CINCT';
 export default function Home() {
+  const [otp, setOtp] = useState(['', '', '', '', '']);
+  const [error, setError] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleChange = (value: string, index: number) => {
+    console.log("value", value)
+    const newOtp = [...otp];
+    newOtp[index] = value.toUpperCase();
+    setOtp(newOtp);
+
+    // Move focus to next input
+    if (value && index < 4) {
+      const nextInput = document.getElementById(`otp-input-${index + 1}`);
+      if (nextInput) {
+        nextInput.focus();
+      }
+    }
+  };
+  
+  const handleKeyDown = (e: any, index: number) => {
+    const key = e.key;
+
+    // Xóa ký tự khi nhấn Backspace hoặc Delete
+    if ((key === 'Backspace' || key === 'Delete') && index > 0) {
+      const prevInput = document.getElementById(`otp-input-${index - 1}`);
+      if (prevInput) {
+        const newOtp = [...otp];
+        newOtp[index] = '';
+        setOtp(newOtp);
+        prevInput.focus();
+      }
+    }
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const otpValue = otp.join('');
+
+    // Kiểm tra OTP
+    if (otpValue !== correctOTP) {
+      setError(true);
+      console.log('OTP Incorrect');
+    } else {
+      setError(false);
+      console.log('OTP Correct');
+      setIsModalOpen(true); 
+    }
+  };
+  
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/pages/index.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+       <>
+       <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-12 main-image">
+  <div className="relative bg-white px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl">
+    <div className="mx-auto flex w-full max-w-md flex-col space-y-16">
+      <div className="flex flex-col items-center justify-center text-center space-y-2">
+        <div className="font-semibold text-3xl text-gray-900 mb-3">
+          <p>XÁC THỰC MẬT THƯ</p>
+        </div>
+        <div className="flex flex-row text-sm font-medium text-gray-400">
+          <p>Vui lòng nhập 5 trung điểm của 5 mật thư <br/> DuckyCard đã để lại trong hộp bí ấn</p>
         </div>
       </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div>
+        <form onSubmit={handleSubmit}>
+          <div className="flex flex-col space-y-16">
+            <div className="flex flex-row items-center justify-between mx-auto w-full max-w-xl">
+            {otp.map((value, index) => (
+              <div className="w-16 h-16" key={index}>
+                <input
+                  key={index}
+                  id={`otp-input-${index}`}
+                  type="text"
+                  maxLength={1}
+                  value={value}
+                  onKeyDown={(e) => handleKeyDown(e, index)}
+                  onChange={(e) => handleChange(e.target.value, index)}
+                  className={`text-gray-900 w-full h-full flex flex-col items-center justify-center text-center outline-none rounded-xl border text-lg bg-white focus:bg-gray-50 focus:ring-1 ${
+                    error ? 'border-red-500 ring-red-500' : 'border-gray-200 ring-blue-700'
+                  }`}
+                />
+                </div>
+            ))} 
+            </div>
+
+              <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
+                {error && <p className="text-red-500"> Sự thật chỉ có một! Hãy thử lại đáp án khác</p>}
+              </div>
+            <div className="flex flex-col space-y-5">
+              <div>
+                <button className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm">
+                Xác nhận
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </form>
+             {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white w-full max-w-md mx-auto p-6 rounded-lg shadow-lg relative">
+            <button
+              className="absolute top-3 right-3 text-gray-600 hover:text-gray-900 focus:outline-none"
+              onClick={closeModal}
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
+              </svg>
+            </button>
+            <img
+              alt="kid"
+              src="/Kid.png"
+              className="w-full h-70 object-cover rounded-lg"
+            />
+            <h3 className="text-xl font-semibold text-center mt-4 text-gray-700 ">
+              Chúc mừng bạn đã tìm đúng vị trí kho báu!
+            </h3>
+            <p className="text-gray-900 text-center mt-2">
+              Bạn chính là thám tử tài ba!
+            </p>
+            <button
+              onClick={closeModal}
+              className="mt-6 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition"
+            >
+              Đóng
+            </button>
+          </div>
+        </div>
+      )}
       </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </div>
+  </div>
+</div>
+       </>
   );
 }

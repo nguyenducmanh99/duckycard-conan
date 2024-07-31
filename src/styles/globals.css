@@ -17,6 +17,7 @@
 }
 
 body {
+  font-family: "anton" !important;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -25,7 +26,10 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
-
+.main-image {
+  background-image: url("../../public/c.jpg");
+ 
+}
 @layer utilities {
   .text-balance {
     text-wrap: balance;

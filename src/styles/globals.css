@@ -27,8 +27,9 @@ body {
     rgb(var(--background-start-rgb));
 }
 .main-image {
-  background-image: url("../../public/c.jpg");
- 
+  background-image: url("../../public/background.png");
+  background-size: contain;
+  background-position: center;
 }
 @layer utilities {
   .text-balance {
@@ -39,13 +40,19 @@ body {
 @media (max-width: 800px) {
   .kid-image {
     /* transform: scale(0.5); */
-    height: 50vh;
+    height: 55vh;
+  }
+  .submit-btn {
+    margin-top: 0% !important;
   }
 }
 
 /* Laptop */
 @media (min-width: 1024px) {
-
+  .kid-image {
+    /* transform: scale(0.5); */
+    height: 70vh;
+  }
 }
 
 /* iPhone 6, 7, 8 */
@@ -62,5 +69,12 @@ body {
   }
   .modal {
     width: 90%;
+  }
+}
+
+/* Ipad pro */
+@media (min-width: 1024px) and (max-width: 1366px) {
+  .modal {
+    max-width: 60%;
   }
 }

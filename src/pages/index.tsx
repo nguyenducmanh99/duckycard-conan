@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 const correctOTP = "CINCT";
@@ -60,6 +61,9 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        <link rel="preload" href="/Kid.png" as="image" type="image/png" />
+      </Head>
       <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-12 main-image">
         <div className="relative bg-white px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl">
           <div className="mx-auto flex w-full max-w-md flex-col space-y-16">
@@ -107,7 +111,7 @@ export default function Home() {
                       </p>
                     )}
                   </div>
-                  <div className="flex flex-col space-y-5">
+                  <div className="flex flex-col md:space-y-5 submit-btn">
                     <div>
                       <button className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm">
                         Xác nhận

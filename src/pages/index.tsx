@@ -123,7 +123,7 @@ export default function Home() {
                   isModalOpen ? "block" : "hidden"
                 }`}
               >
-                <div className="bg-white w-full max-w-md mx-auto p-6 rounded-lg shadow-lg relative">
+                <div className="bg-white w-full max-w-lg mx-auto p-6 rounded-lg shadow-lg relative modal">
                   <button
                     className="absolute top-3 right-3 text-gray-600 hover:text-gray-900 focus:outline-none"
                     onClick={closeModal}
@@ -146,7 +146,8 @@ export default function Home() {
                   <img
                     alt="kid"
                     src="/Kid.png"
-                    className="w-full h-[50vh] rounded-lg transform sm:scale-[0.5] md:scale-[0.5]"
+                    // className="w-full sm:h-[50vh] rounded-lg sm:transform sm:scale-[0.5]"
+                    className="w-full h-[55vh] rounded-lg kid-image"
                   />
                   <h3 className="text-xl font-semibold text-center mt-4 text-gray-700 ">
                     Chúc mừng bạn đã tìm đúng vị trí kho báu!

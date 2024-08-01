@@ -35,3 +35,32 @@ body {
     text-wrap: balance;
   }
 }
+
+@media (max-width: 800px) {
+  .kid-image {
+    /* transform: scale(0.5); */
+    height: 50vh;
+  }
+}
+
+/* Laptop */
+@media (min-width: 1024px) {
+
+}
+
+/* iPhone 6, 7, 8 */
+@media (max-width: 375px) and (max-height: 667px) {
+  .kid-image {
+    height: 60vh;
+  }
+}
+
+/* iPhone 6, 7, 8 Plus */
+@media (max-width: 414px) and (max-height: 736px) {
+  .kid-image {
+    height: 55vh;
+  }
+  .modal {
+    width: 90%;
+  }
+}

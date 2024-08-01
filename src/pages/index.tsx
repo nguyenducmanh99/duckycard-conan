@@ -151,7 +151,7 @@ export default function Home() {
                     alt="kid"
                     src="/Kid.png"
                     // className="w-full sm:h-[50vh] rounded-lg sm:transform sm:scale-[0.5]"
-                    className="w-full h-[55vh] rounded-lg kid-image"
+                    className="w-full h-[60vh] rounded-lg kid-image"
                   />
                   <h3 className="text-xl font-semibold text-center mt-4 text-gray-700 ">
                     Chúc mừng bạn đã tìm đúng vị trí kho báu!

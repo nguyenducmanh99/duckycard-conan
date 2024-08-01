@@ -39,7 +39,7 @@ body {
 
 @media (max-width: 800px) {
   .kid-image {
-    height: 62vh;
+    height: 60vh;
   }
   .submit-btn {
     margin-top: 0% !important;
@@ -91,6 +91,6 @@ body {
 /* iPhone 11 Pro Max, 12 Pro Max, 13 Pro Max  */
 @media only screen and (min-device-width: 390px) and (max-device-width: 450px) and (max-device-height: 900px) {
   .kid-image {
-    height: 65vh;
+    height: 60vh;
   }
 }

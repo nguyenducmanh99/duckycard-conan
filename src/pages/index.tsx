@@ -47,22 +47,30 @@ export default function Home() {
     // Kiểm tra OTP
     if (otpValue !== correctOTP) {
       setError(true);
-      setOtp(["", "", "", "", ""]);
       document.getElementById(`otp-input-${0}`)?.focus();
     } else {
       setError(false);
       setIsModalOpen(true);
     }
+    setOtp(["", "", "", "", ""]);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
+  useEffect(() => {
+    const audio = new Audio("/clap.mp3");
+
+    if (isModalOpen) {
+      audio.play();
+    }
+  }, [isModalOpen]);
+
   return (
     <>
       <Head>
-        <link rel="preload" href="/Kid.png" as="image" type="image/png" />
+        <link rel="preload" href="/Kid.webp" as="image" type="image/png" />
       </Head>
       <div className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-12 main-image">
         <div className="relative bg-white px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl">
@@ -149,15 +157,16 @@ export default function Home() {
                   </button>
                   <img
                     alt="kid"
-                    src="/Kid.png"
+                    src="/Kid.webp"
                     // className="w-full sm:h-[50vh] rounded-lg sm:transform sm:scale-[0.5]"
                     className="w-full h-[60vh] rounded-lg kid-image"
                   />
                   <h3 className="text-xl font-semibold text-center mt-4 text-gray-700 ">
-                    Chúc mừng bạn đã tìm đúng vị trí kho báu!
+                    Rất khá đó! <br /> Chúc mừng bạn vì đã tìm ra kho báu!
                   </h3>
                   <p className="text-gray-900 text-center mt-2">
-                    Bạn chính là thám tử tài ba!
+                    Phần thưởng của bạn là 1 tràng pháo tay thật lớn của chúng
+                    tôi!
                   </p>
                   <button
                     onClick={closeModal}

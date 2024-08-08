@@ -27,13 +27,23 @@ body {
     rgb(var(--background-start-rgb));
 }
 .main-image {
-  background-image: url("../../public/background.png");
-  background-size: contain;
+  background-image: url("../../public/main.png");
+  background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
 }
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@media (max-width: 500px) {
+  .main-image {
+    background-image: url("../../public/mobile.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
   }
 }
 

@@ -72,7 +72,7 @@ export default function Home() {
       <Head>
         <link
           rel="preload"
-          href="/public/Kid.jpg"
+          href="/public/kid.webp"
           as="image"
           type="image/png"
         />
@@ -162,14 +162,14 @@ export default function Home() {
                   </button>
                   <img
                     alt="kid"
-                    src="/Kid.jpg"
+                    src="/kid.webp"
                     // className="w-full sm:h-[50vh] rounded-lg sm:transform sm:scale-[0.5]"
                     className="w-full h-[60vh] rounded-lg kid-image"
                   />
-                  <h3 className="text-xl font-semibold text-center mt-4 text-gray-700 ">
+                  <h3 className="text-xl font-semibold text-center mt-4 text-gray-700 text-main">
                     Rất khá đó! <br /> Chúc mừng bạn vì đã tìm ra kho báu!
                   </h3>
-                  <p className="text-gray-900 text-center mt-2">
+                  <p className="text-gray-900 text-center mt-2 text-des">
                     Phần thưởng của bạn là 1 tràng pháo tay thật lớn của chúng
                     tôi!
                   </p>

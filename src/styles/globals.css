@@ -48,6 +48,12 @@ body {
   .btn-close {
     margin-top: 8px !important;
   }
+  .text-des {
+    font-size: 12px !important;
+  }
+  .text-main {
+    font-size: 18px !important;
+  }
 }
 
 @media (max-width: 800px) {

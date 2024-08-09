@@ -70,7 +70,12 @@ export default function Home() {
   return (
     <>
       <Head>
-        <link rel="preload" href="/Kid.webp" as="image" type="image/png" />
+        <link
+          rel="preload"
+          href="/public/Kid.jpg"
+          as="image"
+          type="image/png"
+        />
       </Head>
       <div className="relative flex min-h-screen flex-col justify-center overflow-hidden py-12 main-image">
         <div className="relative bg-white px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl">
@@ -157,7 +162,7 @@ export default function Home() {
                   </button>
                   <img
                     alt="kid"
-                    src="/Kid.webp"
+                    src="/Kid.jpg"
                     // className="w-full sm:h-[50vh] rounded-lg sm:transform sm:scale-[0.5]"
                     className="w-full h-[60vh] rounded-lg kid-image"
                   />
@@ -170,7 +175,7 @@ export default function Home() {
                   </p>
                   <button
                     onClick={closeModal}
-                    className="mt-6 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition"
+                    className="mt-6 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition btn-close"
                   >
                     Đóng
                   </button>
